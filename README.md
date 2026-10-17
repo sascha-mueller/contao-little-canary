@@ -4,6 +4,11 @@
 
 Minimales Demo-Theme für **Contao 5.7**. Nach der Installation zeigt eine einzige Startseite, ob Layout, Stylesheet, Schrift und Inhaltsausgabe funktionieren – ohne Abhängigkeiten, ohne Build-Schritt. Optional legt ein Konsolenbefehl eine versteckte Testseite mit allen Inhaltselementen an.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/sascha-mueller/contao-little-canary/main/docs/screenshot-dark.png">
+  <img src="https://raw.githubusercontent.com/sascha-mueller/contao-little-canary/main/docs/screenshot-light.png" alt="Startseite mit Little Canary: Logo und Menü im Header, Überschrift „Läuft.“ mit einem Absatz, Footer" width="600">
+</picture>
+
 ## Installation
 
 **Contao Manager:** Paket `sascha-mueller/contao-little-canary` suchen, installieren und anschließend die Datenbank aktualisieren.
