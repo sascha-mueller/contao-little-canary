@@ -1,0 +1,41 @@
+{
+    "name": "sascha-mueller/contao-little-canary",
+    "description": "Little Canary – minimal single-page demo theme for Contao 5.7. Check that your installation renders and runs as expected.",
+    "keywords": ["contao", "theme", "demo", "test", "twig", "layout"],
+    "type": "contao-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "sascha-mueller",
+            "homepage": "https://github.com/sascha-mueller"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "contao/core-bundle": "^5.7",
+        "doctrine/dbal": "^3.6 || ^4.0",
+        "symfony/config": "^6.4 || ^7.0",
+        "symfony/console": "^6.4 || ^7.0",
+        "symfony/dependency-injection": "^6.4 || ^7.0",
+        "symfony/filesystem": "^6.4 || ^7.0",
+        "symfony/http-kernel": "^6.4 || ^7.0"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0"
+    },
+    "conflict": {
+        "contao/manager-plugin": "<2.0 || >=3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "LittleCanary\\ContaoTheme\\": "src/"
+        }
+    },
+    "extra": {
+        "contao-manager-plugin": "LittleCanary\\ContaoTheme\\ContaoManager\\Plugin"
+    },
+    "support": {
+        "issues": "https://github.com/sascha-mueller/contao-little-canary/issues",
+        "source": "https://github.com/sascha-mueller/contao-little-canary"
+    }
+}

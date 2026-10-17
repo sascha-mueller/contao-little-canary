@@ -1,0 +1,67 @@
+/* Little Canary – Design-Tokens. Abgeleitet aus design/tokens.json. */
+
+:root {
+  /* Farben – Hell */
+  --lc-canary-500: #FFD23F;   /* Markenfarbe: Flächen, Buttons (Text darauf: --lc-ink-fixed) */
+  --lc-canary-600: #E6A800;   /* Hover auf Gelbflächen, Logo-Schwanz */
+  --lc-canary-700: #B38300;   /* Wortmarke „canary“, nur ab 24px */
+  --lc-canary-800: #7A5900;   /* Links und Akzent-Text im Fließtext */
+  --lc-beak-500:   #F07C1E;   /* seltener Zweitakzent, nie Text */
+  --lc-ink:        #1D1B16;   /* Haupttext */
+  --lc-ink-fixed:  #1D1B16;   /* Text auf Gelb – in beiden Themes dunkel */
+  --lc-muted:      #5C574A;   /* Sekundärtext */
+  --lc-surface-100:#FBFAF6;   /* Seitenhintergrund */
+  --lc-surface-0:  #FFFFFF;   /* Karten, Felder */
+  --lc-border:     #ECE8DC;   /* Haarlinien */
+  --lc-border-strong:#8A8473; /* Feldrahmen, Fokusring */
+  --lc-success:    #2F7A3A;   /* Status „bestanden“ */
+  --lc-error:      #B3261E;   /* Status „Fehler“ */
+
+  /* Schrift */
+  --lc-font-sans: "Outfit", system-ui, sans-serif;
+  --lc-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --lc-text-display: 700 56px/60px var(--lc-font-sans);
+  --lc-text-h1:      700 40px/48px var(--lc-font-sans);
+  --lc-text-h2:      600 28px/36px var(--lc-font-sans);
+  --lc-text-h3:      600 22px/30px var(--lc-font-sans);
+  --lc-text-body:    400 17px/27px var(--lc-font-sans);
+  --lc-text-small:   400 14px/20px var(--lc-font-sans);
+  --lc-text-label:   600 13px/16px var(--lc-font-sans);
+  --lc-text-code:    400 15px/24px var(--lc-font-mono);
+
+  /* Abstände */
+  --lc-space-1: 4px;
+  --lc-space-2: 8px;
+  --lc-space-4: 16px;
+  --lc-space-6: 24px;
+  --lc-space-10: 40px;
+  --lc-space-16: 64px;
+
+  /* Radien */
+  --lc-radius-sm: 8px;
+  --lc-radius-md: 12px;
+  --lc-radius-lg: 24px;
+  --lc-radius-pill: 999px;
+
+  /* Layout */
+  --lc-content-width: 760px;
+  --lc-wide-width: 1120px;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --lc-canary-700: #FFD23F;
+    --lc-canary-800: #FFE07A;
+    --lc-ink:        #FBFAF6;
+    --lc-muted:      #B8B2A2;
+    --lc-surface-100:#1D1B16;
+    --lc-surface-0:  #26231D;
+    --lc-border:     #3A362D;
+    --lc-border-strong:#7D776A;
+    --lc-success:    #7ED38A;
+    --lc-error:      #FF8A80;
+  }
+}

@@ -1,0 +1,17 @@
+{#
+    Little Canary – Seitenlayout
+
+    Variante von "page/layout". Die Slots header, main und footer
+    werden unverändert vom Core übernommen; ergänzt werden nur
+    Stylesheets, Font-Preload und Favicon.
+#}
+{% extends '@Contao/page/layout.html.twig' %}
+
+{% block head %}
+    {{ parent() }}
+
+    <link rel="icon" href="{{ asset('img/little-canary-favicon.svg', 'little_canary') }}" type="image/svg+xml">
+    <link rel="preload" href="{{ asset('fonts/outfit-400.woff2', 'little_canary') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{{ asset('css/tokens.css', 'little_canary') }}">
+    <link rel="stylesheet" href="{{ asset('css/little-canary.css', 'little_canary') }}">
+{% endblock %}

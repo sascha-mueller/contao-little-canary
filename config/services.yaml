@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    LittleCanary\ContaoTheme\:
+        resource: ../src/
+        exclude:
+            - ../src/ContaoManager/
+            - ../src/LittleCanaryBundle.php
