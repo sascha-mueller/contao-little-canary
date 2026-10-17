@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="Little Canary">
+<path d="M30 74 L6 92 L34 90 Z" fill="#E6A800"/>
+<circle cx="56" cy="70" r="34" fill="#FFD23F"/>
+<circle cx="80" cy="42" r="21" fill="#FFD23F"/>
+<path d="M99 36 L116 44 L99 52 Z" fill="#F07C1E"/>
+<circle cx="86" cy="38" r="4" fill="#1D1B16"/>
+<path d="M38 70 L50 82 L72 58" fill="none" stroke="#1D1B16" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="50" y1="103" x2="46" y2="114" stroke="#FBFAF6" stroke-width="4" stroke-linecap="round"/>
+<line x1="64" y1="103" x2="66" y2="114" stroke="#FBFAF6" stroke-width="4" stroke-linecap="round"/>
+</svg>

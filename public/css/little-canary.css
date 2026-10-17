@@ -1,0 +1,1222 @@
+/*
+ * Little Canary – Contao-Theme
+ * Grundlayout und Inhaltselemente. Setzt tokens.css voraus.
+ * Selektoren zielen auf das unveränderte Markup von Contao 5.7
+ * (Layout-Typ "modern", Slots header/main/footer, Twig-Inhaltselemente).
+ */
+
+/* ==========================================================================
+   Schrift (lokal, OFL)
+   ========================================================================== */
+
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/outfit-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/outfit-600.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/outfit-700.woff2") format("woff2");
+}
+
+/* ==========================================================================
+   Abgeleitete Layout-Werte (nur aus Tokens)
+   ========================================================================== */
+
+:root {
+  --lc-gutter: var(--lc-space-4);
+  --lc-section: var(--lc-space-10);
+  --lc-flow: var(--lc-space-6);
+}
+
+@media (min-width: 600px) {
+  :root {
+    --lc-gutter: var(--lc-space-6);
+    --lc-section: var(--lc-space-16);
+    --lc-flow: var(--lc-space-10);
+  }
+}
+
+/* ==========================================================================
+   Basis
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Sprungmarken (z. B. Top-Link) sanft scrollen – nicht bei reduzierter Bewegung */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--lc-surface-100);
+  color: var(--lc-ink);
+  font: var(--lc-text-body);
+}
+
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+a {
+  color: var(--lc-canary-800);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--lc-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--lc-border-strong);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--lc-canary-500);
+  color: var(--lc-ink-fixed);
+}
+
+/* Contao-Hilfsklasse, z. B. "Navigation überspringen" */
+.invisible {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.invisible:focus {
+  position: static !important;
+  width: auto;
+  height: auto;
+  margin: 0;
+  clip: auto;
+  overflow: visible;
+}
+
+/* ==========================================================================
+   Typografie
+   ========================================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 var(--lc-space-4);
+  color: var(--lc-ink);
+}
+
+h1 {
+  font: var(--lc-text-h1);
+}
+
+h2 {
+  font: var(--lc-text-h2);
+}
+
+h3 {
+  font: var(--lc-text-h3);
+}
+
+h4,
+h5,
+h6 {
+  font: var(--lc-text-body);
+  font-weight: 600;
+}
+
+h5,
+h6 {
+  color: var(--lc-muted);
+}
+
+@media (max-width: 599px) {
+  h1 {
+    font: 700 32px/40px var(--lc-font-sans);
+  }
+}
+
+p {
+  margin: 0 0 var(--lc-space-4);
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+small {
+  font: var(--lc-text-small);
+}
+
+ul,
+ol {
+  margin: 0 0 var(--lc-space-4);
+  padding-left: var(--lc-space-6);
+}
+
+li + li {
+  margin-top: var(--lc-space-1);
+}
+
+li > ul,
+li > ol {
+  margin: var(--lc-space-1) 0 0;
+}
+
+ul li::marker {
+  color: var(--lc-canary-800);
+}
+
+ol li::marker {
+  color: var(--lc-muted);
+  font-weight: 600;
+}
+
+blockquote {
+  margin: 0 0 var(--lc-space-4);
+  padding: var(--lc-space-2) 0 var(--lc-space-2) var(--lc-space-6);
+  border-left: 4px solid var(--lc-canary-500);
+  font: var(--lc-text-h3);
+  font-weight: 400;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+hr {
+  margin: var(--lc-flow) 0;
+  border: 0;
+  border-top: 1px solid var(--lc-border);
+}
+
+code,
+kbd,
+samp {
+  font: var(--lc-text-code);
+  background: var(--lc-surface-0);
+  border: 1px solid var(--lc-border);
+  border-radius: var(--lc-radius-sm);
+  padding: 0 var(--lc-space-1);
+}
+
+pre {
+  margin: 0 0 var(--lc-space-4);
+  font: var(--lc-text-code);
+  background: var(--lc-surface-0);
+  border: 1px solid var(--lc-border);
+  border-radius: var(--lc-radius-sm);
+  padding: var(--lc-space-4);
+  overflow-x: auto;
+}
+
+pre code {
+  border: 0;
+  padding: 0;
+  background: none;
+}
+
+figure {
+  margin: 0;
+}
+
+figcaption,
+caption {
+  font: var(--lc-text-small);
+  color: var(--lc-muted);
+}
+
+figcaption {
+  margin-top: var(--lc-space-2);
+}
+
+mark {
+  background: var(--lc-canary-500);
+  color: var(--lc-ink-fixed);
+}
+
+/* ==========================================================================
+   Seitengerüst (Slots header / main / footer)
+   ========================================================================== */
+
+body > header,
+body > footer {
+  padding-inline: max(var(--lc-gutter), calc((100% - var(--lc-wide-width)) / 2 + var(--lc-gutter)));
+}
+
+body > main {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: calc(var(--lc-content-width) + 2 * var(--lc-gutter));
+  margin-inline: auto;
+  padding: var(--lc-section) var(--lc-gutter);
+}
+
+/* Header */
+
+body > header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lc-space-4);
+  padding-block: var(--lc-space-4);
+  border-bottom: 1px solid var(--lc-border);
+}
+
+.lc-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--lc-space-2);
+  color: var(--lc-ink);
+  text-decoration: none;
+}
+
+.lc-brand:hover {
+  color: var(--lc-ink);
+}
+
+.lc-brand img {
+  width: 40px;
+  height: 40px;
+}
+
+.lc-wordmark {
+  font: 700 24px/1 var(--lc-font-sans);
+  letter-spacing: -0.5px;
+}
+
+.lc-wordmark span {
+  color: var(--lc-canary-700);
+}
+
+.lc-mark--dark {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .lc-mark--light {
+    display: none;
+  }
+
+  .lc-mark--dark {
+    display: inline;
+  }
+}
+
+/* Navigation (mod_navigation / nav_default) */
+
+.mod_navigation ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--lc-space-2) var(--lc-space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mod_navigation li {
+  margin: 0;
+}
+
+.mod_navigation ul ul {
+  display: none;
+}
+
+.mod_navigation a,
+.mod_navigation strong {
+  display: inline-block;
+  padding-block: var(--lc-space-1);
+  color: var(--lc-ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mod_navigation a:hover,
+.mod_navigation strong.active,
+.mod_navigation a.trail {
+  box-shadow: inset 0 -2px 0 var(--lc-canary-800);
+}
+
+/* Footer */
+
+body > footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--lc-space-2);
+  padding-block: var(--lc-space-6);
+  border-top: 1px solid var(--lc-border);
+  font: var(--lc-text-small);
+  color: var(--lc-muted);
+}
+
+body > footer p {
+  display: flex;
+  align-items: center;
+  gap: var(--lc-space-2);
+  margin: 0;
+}
+
+body > footer img {
+  width: 24px;
+  height: 24px;
+}
+
+/* ==========================================================================
+   Artikel und Abstände zwischen Elementen
+   ========================================================================== */
+
+.mod_article + .mod_article {
+  margin-top: var(--lc-section);
+}
+
+.mod_article > * + *,
+.content-element-group > * + * {
+  margin-top: var(--lc-flow);
+}
+
+/* Letzte Kindelemente sollen keinen Außenabstand nach unten erzeugen */
+.rte > :last-child,
+[class*="content-"] > :last-child {
+  margin-bottom: 0;
+}
+
+/* Überschrift eines Elements (headline-Feld) */
+[class*="content-"] > h1:first-child,
+[class*="content-"] > h2:first-child,
+[class*="content-"] > h3:first-child,
+[class*="content-"] > h4:first-child,
+[class*="content-"] > h5:first-child,
+[class*="content-"] > h6:first-child {
+  margin-bottom: var(--lc-space-4);
+}
+
+/* ==========================================================================
+   Texte: Text, Überschrift, Liste, Tabelle, Beschreibungsliste,
+   Code, Markdown, HTML
+   ========================================================================== */
+
+/* Überschrift-Element: Wrapper ist selbst das hX-Tag */
+h1.content-headline,
+h2.content-headline,
+h3.content-headline,
+h4.content-headline,
+h5.content-headline,
+h6.content-headline {
+  margin-bottom: 0;
+}
+
+/* Text mit Bild (media--above / --below / --left / --right) */
+.media > figure {
+  margin-bottom: var(--lc-space-4);
+}
+
+.media--below > figure {
+  margin: var(--lc-space-4) 0 0;
+}
+
+.media--left::after,
+.media--right::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (min-width: 600px) {
+  .media--left > figure,
+  .media--right > figure {
+    max-width: 50%;
+    margin-bottom: var(--lc-space-2);
+  }
+
+  .media--left > figure {
+    float: left;
+    margin-right: var(--lc-space-6);
+  }
+
+  .media--right > figure {
+    float: right;
+    margin-left: var(--lc-space-6);
+  }
+}
+
+.media figure img {
+  display: block;
+  border-radius: var(--lc-radius-sm);
+}
+
+/* Tabelle */
+.content-table {
+  overflow-x: auto;
+}
+
+.content-table table,
+.rte table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--lc-border);
+  border-radius: var(--lc-radius-sm);
+  background: var(--lc-surface-100);
+}
+
+.content-table caption,
+.rte table caption {
+  padding-bottom: var(--lc-space-2);
+  text-align: left;
+}
+
+.content-table th,
+.content-table td,
+.rte th,
+.rte td {
+  padding: var(--lc-space-2) var(--lc-space-4);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--lc-border);
+}
+
+.content-table thead th,
+.rte thead th {
+  font: var(--lc-text-label);
+  background: var(--lc-surface-0);
+}
+
+.content-table tbody th {
+  font-weight: 600;
+}
+
+.content-table thead th:first-child,
+.rte thead th:first-child {
+  border-top-left-radius: var(--lc-radius-sm);
+}
+
+.content-table thead th:last-child,
+.rte thead th:last-child {
+  border-top-right-radius: var(--lc-radius-sm);
+}
+
+.content-table tbody tr:last-child > *,
+.content-table tfoot tr:last-child > *,
+.rte tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.content-table tfoot td,
+.content-table tfoot th {
+  font-weight: 600;
+  border-top: 1px solid var(--lc-border-strong);
+}
+
+/* Sortierbare Tabelle */
+.content-table th button {
+  all: unset;
+  cursor: pointer;
+}
+
+.content-table th button:focus-visible {
+  outline: 2px solid var(--lc-border-strong);
+  outline-offset: 2px;
+}
+
+/* Beschreibungsliste */
+.content-description-list dl,
+.content-template dl,
+.rte dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--lc-space-2) var(--lc-space-6);
+  margin: 0;
+}
+
+.content-description-list dt,
+.content-template dt,
+.rte dt {
+  color: var(--lc-muted);
+  font: var(--lc-text-small);
+  align-self: center;
+}
+
+.content-description-list dd,
+.content-template dd,
+.rte dd {
+  margin: 0;
+}
+
+@media (max-width: 599px) {
+  .content-description-list dl,
+  .content-template dl,
+  .rte dl {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .content-description-list dd + dt,
+  .content-template dd + dt,
+  .rte dd + dt {
+    margin-top: var(--lc-space-2);
+  }
+}
+
+/* Code (highlight.php-Theme wird an die Tokens angepasst) */
+.content-code pre {
+  margin: 0;
+}
+
+.content-code pre code.hljs {
+  display: block;
+  padding: 0;
+  background: none;
+  color: var(--lc-ink);
+  overflow: visible;
+}
+
+/* Alle Farben des highlight.php-Themes zurücksetzen – dessen feste Farben
+   erreichen im Dunkelmodus keinen ausreichenden Kontrast. Danach nur
+   geprüfte Token-Farben (Kontrast ≥ 4.5:1 auf --lc-surface-0). */
+.content-code .hljs [class*="hljs-"] {
+  color: inherit;
+  background: none;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.content-code .hljs .hljs-comment,
+.content-code .hljs .hljs-quote,
+.content-code .hljs .hljs-meta {
+  color: var(--lc-muted);
+  font-style: italic;
+}
+
+.content-code .hljs .hljs-keyword,
+.content-code .hljs .hljs-selector-tag,
+.content-code .hljs .hljs-built_in,
+.content-code .hljs .hljs-name,
+.content-code .hljs .hljs-tag,
+.content-code .hljs .hljs-title,
+.content-code .hljs .hljs-section,
+.content-code .hljs .hljs-doctag {
+  color: var(--lc-canary-800);
+  font-weight: 600;
+}
+
+.content-code .hljs .hljs-link {
+  text-decoration: underline;
+}
+
+/* Diff: Bedeutung nicht nur über Farbe, sondern über Zeichen und Stil */
+.content-code .hljs .hljs-deletion {
+  text-decoration: line-through;
+}
+
+.content-code .hljs .hljs-addition {
+  font-weight: 600;
+}
+
+.content-code .hljs .hljs-emphasis {
+  font-style: italic;
+}
+
+.content-code .hljs .hljs-strong {
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Links: Hyperlink, Top-Link
+   ========================================================================== */
+
+.content-hyperlink figure img {
+  display: block;
+  border-radius: var(--lc-radius-sm);
+}
+
+/* Optionale Button-Optik über das CSS-Klassen-Feld des Elements:
+   "lc-button" (primär) bzw. "lc-button lc-button--secondary" */
+.lc-button a,
+a.lc-button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lc-space-2);
+  min-height: 44px;
+  padding: 0 var(--lc-space-6);
+  border: 1px solid transparent;
+  border-radius: var(--lc-radius-md);
+  background: var(--lc-canary-500);
+  color: var(--lc-ink-fixed);
+  font: 600 17px/1 var(--lc-font-sans);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.lc-button a:hover,
+a.lc-button:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover {
+  background: var(--lc-canary-600);
+  color: var(--lc-ink-fixed);
+}
+
+.lc-button--secondary a,
+a.lc-button--secondary,
+input[type="reset"] {
+  background: transparent;
+  color: var(--lc-ink);
+  border-color: var(--lc-border-strong);
+}
+
+.lc-button--secondary a:hover,
+a.lc-button--secondary:hover,
+input[type="reset"]:hover {
+  background: var(--lc-surface-0);
+  color: var(--lc-ink);
+}
+
+button:disabled,
+input:disabled[type="submit"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Komponenten-Buttons ohne Button-Optik zurücksetzen */
+.handorgel__header__button,
+[data-splash-screen] {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+}
+
+.content-toplink {
+  text-align: right;
+  font: var(--lc-text-small);
+}
+
+.content-toplink a::before {
+  content: "↑ ";
+}
+
+/* ==========================================================================
+   Dateien: Bild, Galerie, Download(s)
+   ========================================================================== */
+
+.content-image figure img,
+.content-gallery figure img {
+  display: block;
+  border-radius: var(--lc-radius-sm);
+}
+
+.content-image figure a,
+.content-gallery figure a {
+  display: block;
+  border-radius: var(--lc-radius-sm);
+}
+
+/* Galerie: Spaltenzahl aus dem Backend (content-gallery--cols-N) */
+.content-gallery ul {
+  --lc-gallery-cols: 4;
+  display: grid;
+  grid-template-columns: repeat(min(2, var(--lc-gallery-cols)), minmax(0, 1fr));
+  gap: var(--lc-space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.content-gallery li {
+  margin: 0;
+}
+
+.content-gallery li[hidden] {
+  display: none;
+}
+
+.content-gallery--cols-1 ul { --lc-gallery-cols: 1; }
+.content-gallery--cols-2 ul { --lc-gallery-cols: 2; }
+.content-gallery--cols-3 ul { --lc-gallery-cols: 3; }
+.content-gallery--cols-4 ul { --lc-gallery-cols: 4; }
+.content-gallery--cols-5 ul { --lc-gallery-cols: 5; }
+.content-gallery--cols-6 ul { --lc-gallery-cols: 6; }
+.content-gallery--cols-7 ul { --lc-gallery-cols: 7; }
+.content-gallery--cols-8 ul { --lc-gallery-cols: 8; }
+.content-gallery--cols-9 ul { --lc-gallery-cols: 9; }
+.content-gallery--cols-10 ul { --lc-gallery-cols: 10; }
+.content-gallery--cols-11 ul { --lc-gallery-cols: 11; }
+.content-gallery--cols-12 ul { --lc-gallery-cols: 12; }
+
+@media (min-width: 600px) {
+  .content-gallery ul {
+    grid-template-columns: repeat(var(--lc-gallery-cols), minmax(0, 1fr));
+  }
+}
+
+/* Download / Downloads */
+.content-downloads ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--lc-border);
+  border-radius: var(--lc-radius-sm);
+  background: var(--lc-surface-0);
+}
+
+.content-downloads li {
+  margin: 0;
+  padding: var(--lc-space-2) var(--lc-space-4);
+}
+
+.content-downloads li + li {
+  border-top: 1px solid var(--lc-border);
+}
+
+.download-element a {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--lc-space-2);
+  font-weight: 600;
+}
+
+.download-element a::before {
+  content: "↓";
+  color: var(--lc-muted);
+}
+
+.download-element .size {
+  font: var(--lc-text-small);
+  color: var(--lc-muted);
+}
+
+.download-element figure {
+  margin-top: var(--lc-space-2);
+}
+
+/* ==========================================================================
+   Medien: Player, YouTube, Vimeo
+   ========================================================================== */
+
+.content-player video,
+.content-player audio {
+  display: block;
+  width: 100%;
+  border-radius: var(--lc-radius-sm);
+}
+
+.content-youtube figure,
+.content-vimeo figure {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--lc-border);
+  border-radius: var(--lc-radius-sm);
+  background: var(--lc-surface-0);
+}
+
+.content-youtube iframe,
+.content-vimeo iframe {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
+/* Seitenverhältnis aus dem Backend (aspect--16:9 usw.) */
+.aspect iframe,
+.aspect [data-splash-screen] {
+  aspect-ratio: var(--lc-aspect, 16 / 9);
+  height: auto;
+}
+
+.aspect--16\:9 { --lc-aspect: 16 / 9; }
+.aspect--16\:10 { --lc-aspect: 16 / 10; }
+.aspect--21\:9 { --lc-aspect: 21 / 9; }
+.aspect--4\:3 { --lc-aspect: 4 / 3; }
+.aspect--3\:2 { --lc-aspect: 3 / 2; }
+.aspect--1\:1 { --lc-aspect: 1 / 1; }
+
+.content-youtube figcaption,
+.content-vimeo figcaption {
+  margin: 0;
+  padding: var(--lc-space-2) var(--lc-space-4);
+  border-top: 1px solid var(--lc-border);
+}
+
+/* Splash-Screen (Datenschutz-Vorschaltbild) */
+[data-splash-screen] {
+  position: relative;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+[data-splash-screen] img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+[data-splash-screen] > span {
+  position: absolute;
+  inset: auto var(--lc-space-4) var(--lc-space-4);
+  padding: var(--lc-space-2) var(--lc-space-4);
+  border-radius: var(--lc-radius-sm);
+  background: var(--lc-surface-0);
+  color: var(--lc-ink);
+  font: var(--lc-text-small);
+  text-align: left;
+}
+
+[data-splash-screen]:hover > span {
+  background: var(--lc-canary-500);
+  color: var(--lc-ink-fixed);
+}
+
+/* ==========================================================================
+   Akkordeon (handorgel) und Content-Slider (swiper)
+   ========================================================================== */
+
+.content-accordion {
+  border: 1px solid var(--lc-border);
+  border-radius: var(--lc-radius-sm);
+  background: var(--lc-surface-0);
+  overflow: hidden;
+}
+
+.content-accordion .handorgel__header {
+  margin: 0;
+  font: var(--lc-text-body);
+  font-weight: 600;
+  border: 0;
+}
+
+.content-accordion .handorgel__header + .handorgel__content,
+.content-accordion .handorgel__content + .handorgel__header {
+  border-top: 1px solid var(--lc-border);
+}
+
+.content-accordion .handorgel__header__button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lc-space-4);
+  width: 100%;
+  padding: var(--lc-space-4) var(--lc-space-6);
+  background: var(--lc-surface-0);
+  color: var(--lc-ink);
+  text-align: left;
+}
+
+.content-accordion .handorgel__header__button::after {
+  content: "+";
+  font: var(--lc-text-h3);
+  color: var(--lc-muted);
+}
+
+.content-accordion .handorgel__header--open .handorgel__header__button::after {
+  content: "–";
+}
+
+.content-accordion .handorgel__header__button:hover {
+  background: var(--lc-surface-100);
+}
+
+.content-accordion .handorgel__header__button:focus-visible {
+  outline: 2px solid var(--lc-border-strong);
+  outline-offset: -2px;
+}
+
+.content-accordion .handorgel__content {
+  border: 0;
+  background: var(--lc-surface-0);
+}
+
+.content-accordion .handorgel__content__inner {
+  padding: 0 var(--lc-space-6) var(--lc-space-6);
+}
+
+.content-swiper .swiper {
+  --swiper-theme-color: var(--lc-canary-800);
+  --swiper-navigation-color: var(--lc-ink);
+  --swiper-navigation-size: 24px;
+  --swiper-pagination-bullet-inactive-color: var(--lc-border-strong);
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  padding-bottom: var(--lc-space-10);
+  border-radius: var(--lc-radius-sm);
+}
+
+.content-swiper .swiper-slide img {
+  display: block;
+  width: 100%;
+  border-radius: var(--lc-radius-sm);
+}
+
+/* ==========================================================================
+   Einbindungen: Artikel-Teaser, Formular, Kommentare, Login
+   ========================================================================== */
+
+.content-teaser p.more,
+.mod_article .more {
+  margin: var(--lc-space-2) 0 0;
+}
+
+.content-teaser a[title],
+.more a {
+  font-weight: 600;
+}
+
+/* Formulare (Contao-Formulargenerator und Mitgliedermodule) */
+form fieldset {
+  margin: 0;
+  padding: var(--lc-space-4) var(--lc-space-6);
+  border: 1px solid var(--lc-border);
+  border-radius: var(--lc-radius-sm);
+}
+
+form legend {
+  padding: 0 var(--lc-space-2);
+  font: var(--lc-text-label);
+}
+
+form .widget + .widget,
+form fieldset + .widget,
+form .widget + fieldset {
+  margin-top: var(--lc-space-4);
+}
+
+form .widget > label,
+form fieldset > legend,
+form .widget > fieldset > legend {
+  display: block;
+  margin-bottom: var(--lc-space-1);
+  font: var(--lc-text-label);
+}
+
+form .mandatory {
+  color: var(--lc-canary-800);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="file"],
+select,
+textarea {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 var(--lc-space-4);
+  border: 1px solid var(--lc-border-strong);
+  border-radius: var(--lc-radius-sm);
+  background: var(--lc-surface-100);
+  color: var(--lc-ink);
+  font: var(--lc-text-body);
+}
+
+::placeholder {
+  color: var(--lc-muted);
+  opacity: 1;
+}
+
+textarea {
+  min-height: calc(5 * 27px);
+  padding: var(--lc-space-2) var(--lc-space-4);
+  resize: vertical;
+}
+
+input[type="file"] {
+  padding: var(--lc-space-2) var(--lc-space-4);
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--lc-canary-800);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--lc-canary-800);
+  vertical-align: middle;
+}
+
+form .checkbox_container,
+form .radio_container {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+form .checkbox_container > span,
+form .radio_container > span {
+  display: flex;
+  align-items: center;
+  gap: var(--lc-space-2);
+  margin-top: var(--lc-space-1);
+}
+
+form .checkbox_container label,
+form .radio_container label {
+  font: var(--lc-text-body);
+}
+
+form .widget-explanation {
+  color: var(--lc-muted);
+  font: var(--lc-text-small);
+}
+
+form .widget-submit {
+  margin-top: var(--lc-space-6);
+}
+
+form p.error,
+form .error {
+  color: var(--lc-error);
+}
+
+form p.error {
+  margin: 0 0 var(--lc-space-1);
+  font: var(--lc-text-small);
+}
+
+form input.error,
+form select.error,
+form textarea.error {
+  border-color: var(--lc-error);
+}
+
+form .confirm,
+.tl_confirm {
+  color: var(--lc-success);
+}
+
+/* Kommentare (comments-bundle) */
+.comment_default {
+  padding: var(--lc-space-4) 0;
+  border-bottom: 1px solid var(--lc-border);
+}
+
+.comment_default .info {
+  margin-bottom: var(--lc-space-2);
+  font: var(--lc-text-small);
+  color: var(--lc-muted);
+}
+
+.comment_default .reply {
+  margin-top: var(--lc-space-2);
+  padding-left: var(--lc-space-4);
+  border-left: 2px solid var(--lc-border);
+}
+
+/* ==========================================================================
+   Paginierung (Liste, Galerie, Module)
+   ========================================================================== */
+
+.pagination ul,
+[data-pagination] ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--lc-space-2);
+  margin: var(--lc-space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pagination li,
+[data-pagination] li {
+  margin: 0;
+}
+
+.pagination a,
+.pagination strong,
+[data-pagination] a,
+[data-pagination] strong {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 var(--lc-space-2);
+  border: 1px solid var(--lc-border);
+  border-radius: var(--lc-radius-sm);
+  text-decoration: none;
+}
+
+.pagination strong.active,
+[data-pagination] strong.active,
+[data-pagination] .active {
+  background: var(--lc-canary-500);
+  border-color: var(--lc-canary-800);
+  color: var(--lc-ink-fixed);
+}
+
+.pagination p {
+  margin: 0;
+  font: var(--lc-text-small);
+  color: var(--lc-muted);
+}

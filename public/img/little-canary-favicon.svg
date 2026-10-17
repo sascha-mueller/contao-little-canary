@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-label="Little Canary">
+<rect width="48" height="48" rx="12" fill="#1D1B16"/>
+<g transform="translate(6 6) scale(0.3)">
+<circle cx="56" cy="70" r="34" fill="#FFD23F"/>
+<circle cx="80" cy="42" r="21" fill="#FFD23F"/>
+<path d="M99 36 L116 44 L99 52 Z" fill="#F07C1E"/>
+<path d="M38 70 L50 82 L72 58" fill="none" stroke="#1D1B16" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
