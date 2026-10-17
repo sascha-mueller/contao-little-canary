@@ -47,4 +47,10 @@ Contao-Templates werden nicht überschrieben.
 
 ## Lizenz
 
-MIT. Die Schrift Outfit steht unter der SIL Open Font License 1.1 (`public/fonts/OFL.txt`).
+Copyright © 2026 Sascha Müller
+
+Dieses Paket steht unter der **GNU Lesser General Public License, Version 3 oder später** (LGPL-3.0-or-later), siehe [`LICENSE`](LICENSE) und die zugrunde liegende GPL-3.0 in [`COPYING`](COPYING).
+
+**Zusätzliche Bedingungen nach Abschnitt 7 (c) und (e) der GPL-3.0:** Die Lizenz gewährt keine Rechte am Namen „Little Canary“ als Marken- oder Kennzeichenrecht. Abgeänderte Versionen dürfen nicht unter diesem Namen verbreitet werden, ohne deutlich als abgeändert gekennzeichnet zu sein.
+
+Die Schrift **Outfit** (`public/fonts/`) steht unter der SIL Open Font License 1.1, siehe [`public/fonts/OFL.txt`](public/fonts/OFL.txt).

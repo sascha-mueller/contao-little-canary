@@ -3,10 +3,10 @@
     "description": "Little Canary – minimal single-page demo theme for Contao 5.7. Check that your installation renders and runs as expected.",
     "keywords": ["contao", "theme", "demo", "test", "twig", "layout"],
     "type": "contao-bundle",
-    "license": "MIT",
+    "license": "LGPL-3.0-or-later",
     "authors": [
         {
-            "name": "sascha-mueller",
+            "name": "Sascha Müller",
             "homepage": "https://github.com/sascha-mueller"
         }
     ],
